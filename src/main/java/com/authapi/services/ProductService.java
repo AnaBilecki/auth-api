@@ -9,7 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -20,11 +22,15 @@ public class ProductService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public List<ProductResponseDTO> findAll() {
+        List<Product> entities = repository.findAll();
+        return entities.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
     public ProductResponseDTO findById(Long id) {
         Optional<Product> entity = repository.findById(id);
         return convertToDTO(entity.orElseThrow(() -> new ResourceNotFoundException(id)));
     }
-
     private Product convertToEntity(ProductRequestDTO dto) {
         return modelMapper.map(dto, Product.class);
     }

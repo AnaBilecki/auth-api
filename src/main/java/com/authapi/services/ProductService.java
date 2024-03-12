@@ -31,6 +31,12 @@ public class ProductService {
         Optional<Product> entity = repository.findById(id);
         return convertToDTO(entity.orElseThrow(() -> new ResourceNotFoundException(id)));
     }
+
+    public ProductResponseDTO insert(ProductRequestDTO dto) {
+        Product entity = repository.save(convertToEntity(dto));
+        return convertToDTO(entity);
+    }
+
     private Product convertToEntity(ProductRequestDTO dto) {
         return modelMapper.map(dto, Product.class);
     }

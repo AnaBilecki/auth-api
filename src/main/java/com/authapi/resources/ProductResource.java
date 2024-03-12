@@ -1,13 +1,13 @@
 package com.authapi.resources;
 
+import com.authapi.dto.ProductRequestDTO;
 import com.authapi.dto.ProductResponseDTO;
 import com.authapi.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +26,10 @@ public class ProductResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductResponseDTO> insert (@Valid @RequestBody ProductRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.insert(dto));
     }
 }

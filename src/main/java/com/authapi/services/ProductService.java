@@ -37,6 +37,14 @@ public class ProductService {
         return convertToDTO(entity);
     }
 
+    public void delete(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException(id);
+        }
+    }
+
     private Product convertToEntity(ProductRequestDTO dto) {
         return modelMapper.map(dto, Product.class);
     }

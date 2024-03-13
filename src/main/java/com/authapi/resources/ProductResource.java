@@ -29,7 +29,13 @@ public class ProductResource {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDTO> insert (@Valid @RequestBody ProductRequestDTO dto) {
+    public ResponseEntity<ProductResponseDTO> insert(@Valid @RequestBody ProductRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.insert(dto));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

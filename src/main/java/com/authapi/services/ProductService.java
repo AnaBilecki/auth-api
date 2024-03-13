@@ -5,6 +5,7 @@ import com.authapi.dto.ProductResponseDTO;
 import com.authapi.entities.Product;
 import com.authapi.repositories.ProductRepository;
 import com.authapi.exceptions.ResourceNotFoundException;
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,21 @@ public class ProductService {
         } else {
             throw new ResourceNotFoundException(id);
         }
+    }
+
+    public ProductResponseDTO update(Long id, ProductRequestDTO dto) {
+        Optional<Product> optionalEntity = repository.findById(id);
+        if (optionalEntity.isEmpty()) {
+            throw new ResourceNotFoundException(id);
+        }
+        Product entity = optionalEntity.get();
+        updateData(entity, dto);
+        return convertToDTO(repository.save(entity));
+    }
+
+    private void updateData(Product entity, ProductRequestDTO dto) {
+        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
+        modelMapper.map(dto, entity);
     }
 
     private Product convertToEntity(ProductRequestDTO dto) {

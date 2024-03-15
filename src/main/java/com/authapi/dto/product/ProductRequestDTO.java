@@ -1,4 +1,4 @@
-package com.authapi.dto;
+package com.authapi.dto.product;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

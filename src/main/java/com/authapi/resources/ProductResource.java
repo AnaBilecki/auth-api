@@ -1,7 +1,7 @@
 package com.authapi.resources;
 
-import com.authapi.dto.ProductRequestDTO;
-import com.authapi.dto.ProductResponseDTO;
+import com.authapi.dto.product.ProductRequestDTO;
+import com.authapi.dto.product.ProductResponseDTO;
 import com.authapi.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

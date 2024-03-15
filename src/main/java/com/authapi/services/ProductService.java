@@ -1,8 +1,8 @@
 package com.authapi.services;
 
-import com.authapi.dto.ProductRequestDTO;
-import com.authapi.dto.ProductResponseDTO;
-import com.authapi.entities.Product;
+import com.authapi.dto.product.ProductRequestDTO;
+import com.authapi.dto.product.ProductResponseDTO;
+import com.authapi.entities.product.Product;
 import com.authapi.repositories.ProductRepository;
 import com.authapi.exceptions.ResourceNotFoundException;
 import org.modelmapper.Conditions;

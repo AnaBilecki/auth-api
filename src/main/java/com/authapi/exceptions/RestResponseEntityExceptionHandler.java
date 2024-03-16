@@ -13,7 +13,7 @@ import java.util.Map;
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler({ ResourceNotFoundException.class, LoginAlreadyInUseException.class })
     protected ResponseEntity<Object> handleResourceNotFound(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
